@@ -27,6 +27,7 @@ input_image = "images/content-images/" + img
 output_image = "images/output-images/" + style_name + "-" + img
 
 st.write('### Source image:')
+st.image("./images/content-images/amber.jpg")
 '''
 image = Image.open(input_image)
 st.image(image, width=400) # image: numpy array
