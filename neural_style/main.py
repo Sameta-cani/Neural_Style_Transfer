@@ -6,17 +6,8 @@
 import streamlit as st
 
 from PIL import Image
-import PIL
-import re
-import torch
-import torchvision
-import numpy as np
-import collections
-
-st.write(collections)
-'''
-
 import style
+
 
 st.title('PyTorch Style Transfer')
 
@@ -48,5 +39,3 @@ if clicked:
     st.write('### Output image:')
     image = Image.open(output_image)
     st.image(image, width=400)
-'''
-st.write('hello!')
