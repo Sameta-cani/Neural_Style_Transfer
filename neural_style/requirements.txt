@@ -3,3 +3,4 @@ regex
 numpy
 torch
 torchvision
+collection

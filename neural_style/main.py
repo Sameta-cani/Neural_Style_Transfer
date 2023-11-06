@@ -11,10 +11,9 @@ import re
 import torch
 import torchvision
 import numpy as np
+import collections
 
-st.write(np.__version__)
-st.write(torch.__version__)
-st.write(torchvision.__version__)
+st.write(collections)
 '''
 
 import style
