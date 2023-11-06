@@ -26,8 +26,8 @@ model= "saved_models/" + style_name + ".pth"
 input_image = "images/content-images/" + img
 output_image = "images/output-images/" + style_name + "-" + img
 
-st.write('### Source image2:')
-image = Image.open('증명사진.jpg')
+st.write('### Source image3:')
+image = Image.open('C:\Users\Sangjin\OneDrive\바탕 화면\기타\문서\STREAMLIT-STYLE-TRANSFER\neural_style\증명사진.jpg')
 st.image(image)
 '''
 image = Image.open(input_image)
