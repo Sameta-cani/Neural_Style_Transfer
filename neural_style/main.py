@@ -4,6 +4,8 @@
 # pip install torch torchvision
 # streamlit run main.py
 import streamlit as st
+
+'''
 from PIL import Image
 
 import style
@@ -38,4 +40,5 @@ if clicked:
     st.write('### Output image:')
     image = Image.open(output_image)
     st.image(image, width=400)
-
+'''
+st.write('hello!')
