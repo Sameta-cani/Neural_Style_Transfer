@@ -7,7 +7,8 @@ import streamlit as st
 
 from PIL import Image
 import PIL
-st.write(PIL.__version__)
+import re
+st.write(re.__version__)
 '''
 
 import style
