@@ -27,7 +27,7 @@ input_image = "images/content-images/" + img
 output_image = "images/output-images/" + style_name + "-" + img
 
 st.write('### Source image3:')
-image = Image.open('C:\Users\Sangjin\OneDrive\바탕 화면\기타\문서\STREAMLIT-STYLE-TRANSFER\neural_style\증명사진.jpg')
+image = Image.open('C:\Users\Sangjin\OneDrive\바탕 화면\기타\문서\STREAMLIT-STYLE-TRANSFER\neural_style\test.jpg')
 st.image(image)
 '''
 image = Image.open(input_image)
