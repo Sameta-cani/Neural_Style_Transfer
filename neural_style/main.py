@@ -27,7 +27,7 @@ input_image = "images/content-images/" + img
 output_image = "images/output-images/" + style_name + "-" + img
 
 st.write('### Source image:')
-st.image("https://github.com/Sameta-cani/Neural_Style_Transfer/blob/main/neural_style/images/content-images/amber.jpg")
+st.image("증명사진.jpg")
 '''
 image = Image.open(input_image)
 st.image(image, width=400) # image: numpy array
