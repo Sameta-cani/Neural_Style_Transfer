@@ -8,7 +8,13 @@ import streamlit as st
 from PIL import Image
 import PIL
 import re
-st.write(re.__version__)
+import torch
+import torchvision
+import numpy as np
+
+st.write(np.__version__)
+st.write(torch.__version__)
+st.write(torchvision.__version__)
 '''
 
 import style
