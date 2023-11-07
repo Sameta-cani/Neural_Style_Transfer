@@ -50,7 +50,7 @@ clicked = st.button('Stylize')
 if clicked:
     model = style.load_model(model)
     data = style.stylize(model, input_image, output_image)
-    img = data.clone().clamp(0, 255).numpy()
+    img = data[0].clone().clamp(0, 255).numpy()
     img = img.transpose(1, 2, 0).astype("uint8")
     img = Image.fromarray(img)
     st.write('### Output image:')
