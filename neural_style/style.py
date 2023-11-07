@@ -47,3 +47,5 @@ def stylize(style_model, content_image, output_image):
         output = style_model(content_image).cpu()
             
     utils.save_image(output_image, output[0])
+
+    return output[0]
