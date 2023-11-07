@@ -10,6 +10,8 @@ import style
 import os
 import utils
 
+test = "neural_style"
+
 st.title('PyTorch Style Transfer')
 
 img = st.sidebar.selectbox(
@@ -26,14 +28,13 @@ st.write('### Source image:')
 if img == 'Image upload':
 	img_file = st.file_uploader('이미지를 업로드 하세요.', type=['png', 'jpg', 'jpeg'])
 	if img_file is not None:
-		utils.save_uploaded_file("./images/content-images/", img_file)
+		utils.save_uploaded_file(test + "/images/content-images/", img_file)
 		img = img_file.name
 # if img_file is not None:
 
 # local test: "neural_style" -> "."
 # git test: "." -> "neural_style"
 
-test = "neural_style"
 model = test + "/saved_models/" + style_name + ".pth"
 input_image = test + "/images/content-images/" + img
 output_image = test + "/images/output-images/" + style_name + "-" + img
