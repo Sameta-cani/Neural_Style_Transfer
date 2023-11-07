@@ -59,8 +59,13 @@ if clicked:
     content_image = content_image.unsqueeze(0).to('cpu')
     with torch.no_grad():
         output = model(content_image).cpu()
+    data = output[0]
+    img = data.clone().clamp(0, 255).numpy()
+    img = img.transpose(1, 2, 0).astype("uint8")
+    img = Image.fromarray(img)
 
-    st.image(output[0], width=400)
+    st.write('img output')
+    st.image(img, width=400)
 '''      
 if clicked:
     model = style.load_model(model)
