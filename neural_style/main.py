@@ -60,7 +60,7 @@ if clicked:
     with torch.no_grad():
         output = model(content_image).cpu()
 
-    st.write(output)
+    st.image(output[0], width=400)
 '''      
 if clicked:
     model = style.load_model(model)
