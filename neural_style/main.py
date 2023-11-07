@@ -31,13 +31,14 @@ input_image = "neural_style/images/content-images/" + img
 # input_image = "neural_style/test.jpg"
 output_image = "neural_style/images/output-images/" + style_name + "-" + img
 
-st.write('### Source image3:')
+st.write('### Source image:')
 
 image = Image.open(input_image)
 st.image(image, width=400) # image: numpy array
 
 clicked = st.button('Stylize')
 
+'''
 if clicked:
     model = style.load_model(model)
     style.stylize(model, input_image, output_image)
@@ -45,3 +46,4 @@ if clicked:
     st.write('### Output image:')
     image = Image.open(output_image)
     st.image(image, width=400)
+'''
