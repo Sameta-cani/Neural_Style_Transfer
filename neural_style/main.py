@@ -28,7 +28,7 @@ st.write(content_image)
 with torch.no_grad():
     output = model(content_image).cpu()
 
-st.write(output)
+st.image(output[0])
 '''
 
 st.title('PyTorch Style Transfer')
