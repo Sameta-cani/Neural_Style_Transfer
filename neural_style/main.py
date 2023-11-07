@@ -12,7 +12,6 @@ import utils
 from torchvision import transforms
 import torch
 
-@st.cache
 def stylize(style_model, content_image, output_image):
     content_image = utils.load_image(content_image)
     content_transform = transforms.Compose([
@@ -28,8 +27,6 @@ def stylize(style_model, content_image, output_image):
     utils.save_image(output_image, output[0])
 
 st.title('PyTorch Style Transfer')
-st.write(style.stylize)
-st.write(os.listdir())
 
 img = st.sidebar.selectbox(
     'Select Image',
