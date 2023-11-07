@@ -7,29 +7,40 @@ import streamlit as st
 
 from PIL import Image
 import style
+import os
+import utils
 
-st.title('PyTorch Style Transfer2')
+st.title('PyTorch Style Transfer')
 
 img = st.sidebar.selectbox(
     'Select Image',
-    ('amber.jpg', 'cat.png')
+    ('amber.jpg', 'cat.png', 'Image upload')
 )
 
 style_name = st.sidebar.selectbox(
     'Select Style',
     ('candy', 'mosaic', 'rain_princess', 'udnie')
 )
-
-
-model= "neural_style/saved_models/" + style_name + ".pth"
-input_image = "neural_style/images/content-images/" + img
-# input_image = "neural_style/test.jpg"
-output_image = "neural_style/images/output-images/" + style_name + "-" + img
-
 st.write('### Source image:')
 
-image = Image.open(input_image)
-st.image(image, width=400) # image: numpy array
+if img == 'Image upload':
+	img_file = st.file_uploader('이미지를 업로드 하세요.', type=['png', 'jpg', 'jpeg'])
+	if img_file is not None:
+		utils.save_uploaded_file("./images/content-images/", img_file)
+		img = img_file.name
+# if img_file is not None:
+
+# local test: "neural_style" -> "."
+# git test: "." -> "neural_style"
+
+test = "neural_style"
+model = test + "/saved_models/" + style_name + ".pth"
+input_image = test + "/images/content-images/" + img
+output_image = test + "/images/output-images/" + style_name + "-" + img
+
+if os.path.exists(input_image):
+    image = Image.open(input_image)
+    st.image(image, width=400) # image: numpy array
 
 clicked = st.button('Stylize')
 

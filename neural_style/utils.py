@@ -1,5 +1,7 @@
 import torch
 from PIL import Image
+import os
+import streamlit as st
 
 
 def load_image(filename, size=None, scale=None):
@@ -32,3 +34,11 @@ def normalize_batch(batch):
     std = batch.new_tensor([0.229, 0.224, 0.225]).view(-1, 1, 1)
     batch = batch.div_(255.0)
     return (batch - mean) / std
+
+# 파일 업로드 함수
+def save_uploaded_file(directory, file):
+	if not os.path.exists(directory):
+		os.makedirs(directory)
+	with open(os.path.join(directory, file.name), 'wb') as f:
+		f.write(file.getbuffer())
+	return st.success('파일 업로드 성공')
