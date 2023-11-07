@@ -46,27 +46,7 @@ if os.path.exists(input_image):
     st.image(image, width=400) # image: numpy array
 
 clicked = st.button('Stylize')
-if clicked:
-    st.write('start')
-    model = style.load_model(model)
-    st.write(output_image)
-    content_image = utils.load_image(input_image)
-    content_transform = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Lambda(lambda x: x.mul(255))
-    ])
-    content_image = content_transform(content_image)
-    content_image = content_image.unsqueeze(0).to('cpu')
-    with torch.no_grad():
-        output = model(content_image).cpu()
-    data = output[0]
-    img = data.clone().clamp(0, 255).numpy()
-    img = img.transpose(1, 2, 0).astype("uint8")
-    img = Image.fromarray(img)
-
-    st.write('img output')
-    st.image(img, width=400)
-'''      
+   
 if clicked:
     model = style.load_model(model)
     style.stylize(model, input_image, output_image)
@@ -74,4 +54,3 @@ if clicked:
     st.write('### Output image:')
     image = Image.open(output_image)
     st.image(image, width=400)
-'''
