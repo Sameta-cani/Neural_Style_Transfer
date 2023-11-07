@@ -12,30 +12,6 @@ import utils
 from torchvision import transforms
 import torch
 
-model_path = "neural_style/saved_models/" + 'candy' + ".pth"
-model = style.load_model(model_path)
-style_img = "neural_style/images/style-images/candy.jpg"
-img = "neural_style/test.jpg"
-content_image = utils.load_image(img)
-content_transform = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Lambda(lambda x: x.mul(255))
-    ])
-content_image = content_transform(content_image)
-content_image = content_image.unsqueeze(0).to('cpu')
-st.write(content_image)
-
-with torch.no_grad():
-    output = model(content_image).cpu()
-
-img = output.clone().clamp(0, 255).numpy()
-img = img.transpose(1, 2, 0).astype("uint8")
-img = Image.fromarray(img)
-
-st.image(img)
-
-'''
-
 st.title('PyTorch Style Transfer')
 st.write(style.stylize)
 st.write(os.listdir())
@@ -74,4 +50,3 @@ if clicked:
     st.write('### Output image:')
     image = Image.open(output_image)
     st.image(image, width=400)
-'''
