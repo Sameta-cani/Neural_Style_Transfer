@@ -44,7 +44,12 @@ if os.path.exists(input_image):
     st.image(image, width=400) # image: numpy array
 
 clicked = st.button('Stylize')
+model = style.load_model(model)
+st.write(model)
+if clicked and os.path.exists(output_image):
+      st.write('exist!')
 
+'''      
 if clicked:
     model = style.load_model(model)
     style.stylize(model, input_image, output_image)
@@ -52,3 +57,4 @@ if clicked:
     st.write('### Output image:')
     image = Image.open(output_image)
     st.image(image, width=400)
+'''
