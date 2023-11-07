@@ -34,7 +34,6 @@ def load_model(model_path):
         style_model.eval()
         return style_model
 
-@st.cache
 def stylize(style_model, content_image, output_image):
     content_image = utils.load_image(content_image)
     content_transform = transforms.Compose([
