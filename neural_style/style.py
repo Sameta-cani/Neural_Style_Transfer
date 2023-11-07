@@ -19,7 +19,6 @@ import streamlit as st
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-@st.cache
 def load_model(model_path):
     print('load model')
     with torch.no_grad():
@@ -34,7 +33,6 @@ def load_model(model_path):
         style_model.eval()
         return style_model
 
-@st.cache
 def stylize(style_model, content_image, output_image):
     content_image = utils.load_image(content_image)
     content_transform = transforms.Compose([
