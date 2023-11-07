@@ -7,10 +7,6 @@ import streamlit as st
 
 from PIL import Image
 import style
-import os
-import utils
-from torchvision import transforms
-import torch
 
 st.title('PyTorch Style Transfer2')
 
