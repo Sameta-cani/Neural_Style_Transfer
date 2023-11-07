@@ -47,8 +47,8 @@ clicked = st.button('Stylize')
 model = style.load_model(model)
 st.write(output_image)
 if clicked:
-	style.stylize(model, input_image, output_image)
-	image = Image.open(output_image)
+	image = style.stylize(model, input_image, output_image)
+	# image = Image.open(output_image)
 	st.image(image, width=400)
 
 '''      
