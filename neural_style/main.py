@@ -9,6 +9,8 @@ from PIL import Image
 import style
 import os
 import utils
+from torchvision import transforms
+import torch
 
 test = "neural_style"
 
@@ -44,13 +46,21 @@ if os.path.exists(input_image):
     st.image(image, width=400) # image: numpy array
 
 clicked = st.button('Stylize')
-model = style.load_model(model)
-st.write(output_image)
 if clicked:
-	image = style.stylize(model, input_image, output_image)
-	# image = Image.open(output_image)
-	st.image(image, width=400)
+    st.write('start')
+    model = style.load_model(model)
+    st.write(output_image)
+    content_image = utils.load_image(input_image)
+    content_transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Lambda(lambda x: x.mul(255))
+    ])
+    content_image = content_transform(content_image)
+    content_image = content_image.unsqueeze(0).to('cpu')
+    with torch.no_grad():
+        output = model(content_image).cpu()
 
+    st.write(output)
 '''      
 if clicked:
     model = style.load_model(model)
