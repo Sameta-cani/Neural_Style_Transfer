@@ -47,8 +47,9 @@ clicked = st.button('Stylize')
 model = style.load_model(model)
 st.write(output_image)
 if clicked:
-      if os.path.exists(output_image):
-        st.write('exist!')
+	style.stylize(model, input_image, output_image)
+	image = Image.open(output_image)
+	st.image(image, width=400)
 
 '''      
 if clicked:
