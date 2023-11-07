@@ -26,14 +26,12 @@ style_name = st.sidebar.selectbox(
 )
 
 
-model= "saved_models/" + style_name + ".pth"
-# input_image = "images/content-images/" + img
-input_image = "neural_style/test.jpg"
-output_image = "images/output-images/" + style_name + "-" + img
+model= "neural_style/saved_models/" + style_name + ".pth"
+input_image = "neural_style/images/content-images/" + img
+# input_image = "neural_style/test.jpg"
+output_image = "neural_style/images/output-images/" + style_name + "-" + img
 
 st.write('### Source image3:')
-# image = Image.open('neural_style/test.jpg')
-# st.image(image)
 
 image = Image.open(input_image)
 st.image(image, width=400) # image: numpy array
