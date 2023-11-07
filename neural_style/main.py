@@ -9,7 +9,18 @@ from PIL import Image
 import style
 import os
 
+def load_image(filename, size=None, scale=None):
+    img = Image.open(filename)
+    if size is not None:
+        img = img.resize((size, size), Image.ANTIALIAS)
+    elif scale is not None:
+        img = img.resize((int(img.size[0] / scale), int(img.size[1] / scale)), Image.ANTIALIAS)
+    return img
 
+r = load_image('neural_style/test.jpg')
+st.image(r)
+
+'''
 
 st.title('PyTorch Style Transfer')
 st.write(style.stylize)
@@ -41,7 +52,7 @@ clicked = st.button('Stylize')
 model = style.load_model(model)
 style.stylize(model, input_image, output_image)
 
-'''
+
 if clicked:
     model = style.load_model(model)
     style.stylize(model, input_image, output_image)
