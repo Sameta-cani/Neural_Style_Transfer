@@ -8,9 +8,21 @@ import streamlit as st
 from PIL import Image
 import style
 import os
+import utils
+from torchvision import transforms
 
-model= "neural_style/saved_models/" + 'candy' + ".pth"
-st.write(style.load_model(model))
+model_path = "neural_style/saved_models/" + 'candy' + ".pth"
+model = style.load_model(model_path)
+style_img = "neural_style/images/style-images/candy.jpg"
+img = "neural_style/test.jpg"
+content_image = utils.load_image(img)
+content_transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Lambda(lambda x: x.mul(255))
+    ])
+content_image = content_transform(content_image)
+content_image = content_image.unsqueeze(0).to('cpu')
+st.write(content_image)
 '''
 
 st.title('PyTorch Style Transfer')
