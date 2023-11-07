@@ -7,12 +7,14 @@ import streamlit as st
 
 from PIL import Image
 import style
+import os
 
 
 
 st.title('PyTorch Style Transfer')
 st.write(style.stylize)
-'''
+st.write(os.listdir())
+
 img = st.sidebar.selectbox(
     'Select Image',
     ('amber.jpg', 'cat.png')
@@ -45,4 +47,3 @@ if clicked:
     st.write('### Output image:')
     image = Image.open(output_image)
     st.image(image, width=400)
-'''
