@@ -39,7 +39,7 @@ st.image(image, width=400) # image: numpy array
 clicked = st.button('Stylize')
 
 model = style.load_model(model)
-st.write(model)
+style.stylize(model, input_image, output_image)
 
 '''
 if clicked:
