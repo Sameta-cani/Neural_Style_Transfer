@@ -10,6 +10,7 @@ import style
 import os
 import utils
 from torchvision import transforms
+import torch
 
 model_path = "neural_style/saved_models/" + 'candy' + ".pth"
 model = style.load_model(model_path)
@@ -23,6 +24,11 @@ content_transform = transforms.Compose([
 content_image = content_transform(content_image)
 content_image = content_image.unsqueeze(0).to('cpu')
 st.write(content_image)
+
+with torch.no_grad():
+    output = model(content_image).cpu()
+
+st.write(output)
 '''
 
 st.title('PyTorch Style Transfer')
