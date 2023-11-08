@@ -19,7 +19,7 @@ def perform_style_transfer(input_image, output_image, model, style_name):
     data_img = Image.fromarray(data_img)
     return data_img
 
-st.title('PyTorch Style Transfer')
+st.title('PyTorch Style Transfer-최적')
 
 img = st.sidebar.selectbox(
     'Select Image',
