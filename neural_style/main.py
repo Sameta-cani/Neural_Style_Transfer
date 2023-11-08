@@ -44,7 +44,7 @@ if os.path.exists(input_image):
 clicked = st.button('Stylize')
 
 if clicked:
-    with st.spinner(text="Waiting for Neural Transfer"):
+    with st.spinner(text="Waiting for Style Transfer"):
         model = style.load_model(model)
         data = style.stylize(model, input_image, output_image)
         data_img = data[0].clone().clamp(0, 255).numpy()
