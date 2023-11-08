@@ -1,18 +1,23 @@
-# python3 -m venv venv
-# . venv/bin/activate
-# pip install streamlit
-# pip install torch torchvision
-# streamlit run main.py
 import streamlit as st
-
 from PIL import Image
 import style
-import os
 import utils
+import os
 
-# local test: "neural_style" -> "."
-# git test: "." -> "neural_style"
-test = "neural_style" # "."
+# 상수 정의
+TEST_FOLDER = "neural_style"
+IMAGE_CONTENT_FOLDER = f"{TEST_FOLDER}/images/content-images"
+MODEL_FOLDER = f"{TEST_FOLDER}/saved_models"
+IMAGE_OUTPUT_FOLDER = f"{TEST_FOLDER}/images/output-images"
+
+# 기능별 함수화
+def perform_style_transfer(input_image, output_image, model, style_name):
+    model = style.load_model(model)
+    data = style.stylize(model, input_image, output_image)
+    data_img = data[0].clone().clamp(0, 255).numpy()
+    data_img = data_img.transpose(1, 2, 0).astype("uint8")
+    data_img = Image.fromarray(data_img)
+    return data_img
 
 st.title('PyTorch Style Transfer')
 
@@ -28,36 +33,31 @@ style_name = st.sidebar.selectbox(
 st.write('### Source image:')
 
 if img == 'Image upload':
-	img_file = st.file_uploader('이미지를 업로드 하세요.', type=['png', 'jpg', 'jpeg'])
-	if img_file is not None:
-		utils.save_uploaded_file(test + "/images/content-images/", img_file)
-		img = img_file.name
+    img_file = st.file_uploader('Upload an image.', type=['png', 'jpg', 'jpeg'])
+    if img_file is not None:
+        utils.save_uploaded_file(IMAGE_CONTENT_FOLDER, img_file)
+        img = img_file.name
 
-model = test + "/saved_models/" + style_name + ".pth"
-input_image = test + "/images/content-images/" + img
-output_image = test + "/images/output-images/" + style_name + "-" + img
+input_image = f"{IMAGE_CONTENT_FOLDER}/{img}"
+output_image = f"{IMAGE_OUTPUT_FOLDER}/{style_name}-{img}"
+model = f"{MODEL_FOLDER}/{style_name}.pth"
 
 if os.path.exists(input_image):
     image = Image.open(input_image)
-    st.image(image, width=400) # image: numpy array
+    st.image(image, width=400)
 
 clicked = st.button('Stylize')
 
 if clicked:
     with st.spinner(text="Waiting for Style Transfer"):
-        model = style.load_model(model)
-        data = style.stylize(model, input_image, output_image)
-        data_img = data[0].clone().clamp(0, 255).numpy()
-        data_img = data_img.transpose(1, 2, 0).astype("uint8")
-        data_img = Image.fromarray(data_img)
-
+        styled_image = perform_style_transfer(input_image, output_image, model, style_name)
         st.write('### Output image:')
-        st.image(data_img, width=400)
+        st.image(styled_image, width=400)
 
-        output_path = style_name + "-" + img
-        data_img.save(output_path)
+        output_path = f"{style_name}-{img}"
+        styled_image.save(output_path)
         with open(output_path, "rb") as file:
-            btn = st.download_button(
+            st.download_button(
                 label="Download image",
                 data=file,
                 file_name=output_path,
