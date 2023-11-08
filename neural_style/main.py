@@ -44,21 +44,22 @@ if os.path.exists(input_image):
 clicked = st.button('Stylize')
 
 if clicked:
-    model = style.load_model(model)
-    data = style.stylize(model, input_image, output_image)
-    data_img = data[0].clone().clamp(0, 255).numpy()
-    data_img = data_img.transpose(1, 2, 0).astype("uint8")
-    data_img = Image.fromarray(data_img)
+    with st.spinner(text="Waiting for Neural Transfer"):
+        model = style.load_model(model)
+        data = style.stylize(model, input_image, output_image)
+        data_img = data[0].clone().clamp(0, 255).numpy()
+        data_img = data_img.transpose(1, 2, 0).astype("uint8")
+        data_img = Image.fromarray(data_img)
 
-    st.write('### Output image:')
-    st.image(data_img, width=400)
+        st.write('### Output image:')
+        st.image(data_img, width=400)
 
-    output_path = style_name + "-" + img
-    data_img.save(output_path)
-    with open(output_path, "rb") as file:
-        btn = st.download_button(
-            label="Download image",
-            data=file,
-            file_name=output_path,
-            mime="image/png"
-          )
+        output_path = style_name + "-" + img
+        data_img.save(output_path)
+        with open(output_path, "rb") as file:
+            btn = st.download_button(
+                label="Download image",
+                data=file,
+                file_name=output_path,
+                mime="image/png"
+            )
