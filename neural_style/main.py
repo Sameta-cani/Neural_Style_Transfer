@@ -1,9 +1,8 @@
 import streamlit as st
 from PIL import Image
+import style
 import utils
 import os
-
-
 
 # 상수 정의
 TEST_FOLDER = "neural_style"
@@ -13,14 +12,14 @@ IMAGE_OUTPUT_FOLDER = f"{TEST_FOLDER}/images/output-images"
 
 # 기능별 함수화
 def perform_style_transfer(input_image, output_image, model, style_name):
-    model = utils.load_model(model)
-    data = utils.stylize(model, input_image, output_image)
+    model = style.load_model(model)
+    data = style.stylize(model, input_image, output_image)
     data_img = data[0].clone().clamp(0, 255).numpy()
     data_img = data_img.transpose(1, 2, 0).astype("uint8")
     data_img = Image.fromarray(data_img)
     return data_img
 
-st.title('PyTorch Style Transfer-최적화 진행')
+st.title('PyTorch Style Transfer - ???')
 
 img = st.sidebar.selectbox(
     'Select Image',
@@ -51,7 +50,7 @@ clicked = st.button('Stylize')
 
 if clicked:
     with st.spinner(text="Waiting for Style Transfer"):
-        styled_image = utils.perform_style_transfer(input_image, output_image, model, style_name)
+        styled_image = perform_style_transfer(input_image, output_image, model, style_name)
         st.write('### Output image:')
         st.image(styled_image, width=400)
 
