@@ -5,7 +5,7 @@ import utils
 import os
 
 # 상수 정의
-TEST_FOLDER = "."
+TEST_FOLDER = "neural_style"
 IMAGE_CONTENT_FOLDER = f"{TEST_FOLDER}/images/content-images"
 MODEL_FOLDER = f"{TEST_FOLDER}/saved_models"
 IMAGE_OUTPUT_FOLDER = f"{TEST_FOLDER}/images/output-images"
