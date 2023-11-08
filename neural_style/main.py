@@ -22,7 +22,7 @@ def download_file(file_content, file_name):
 
 
 
-test = "." # "neural_style"
+test = "neural_style" # "."
 
 st.title('PyTorch Style Transfer')
 
