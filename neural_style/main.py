@@ -4,12 +4,12 @@ import utils
 import os
 
 # 상수 정의
-TEST_FOLDER = "." #"neural_style"
+TEST_FOLDER = "neural_style" #"neural_style"
 IMAGE_CONTENT_FOLDER = f"{TEST_FOLDER}/images/content-images"
 MODEL_FOLDER = f"{TEST_FOLDER}/saved_models"
 IMAGE_OUTPUT_FOLDER = f"{TEST_FOLDER}/images/output-images"
 
-st.title('PyTorch Style Transfer')
+st.title('PyTorch Style Transfer - test')
 
 img = st.sidebar.selectbox(
     'Select Image',
