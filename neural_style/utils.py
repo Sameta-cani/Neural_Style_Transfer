@@ -2,7 +2,16 @@ import torch
 from PIL import Image
 import os
 import streamlit as st
+import style
 
+# 기능별 함수화
+def perform_style_transfer(input_image, output_image, model, style_name):
+    model = style.load_model(model)
+    data = style.stylize(model, input_image, output_image)
+    data_img = data[0].clone().clamp(0, 255).numpy()
+    data_img = data_img.transpose(1, 2, 0).astype("uint8")
+    data_img = Image.fromarray(data_img)
+    return data_img
 
 def load_image(filename, size=None, scale=None):
     img = Image.open(filename)

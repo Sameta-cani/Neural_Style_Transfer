@@ -5,19 +5,10 @@ import utils
 import os
 
 # 상수 정의
-TEST_FOLDER = "neural_style"
+TEST_FOLDER = "."
 IMAGE_CONTENT_FOLDER = f"{TEST_FOLDER}/images/content-images"
 MODEL_FOLDER = f"{TEST_FOLDER}/saved_models"
 IMAGE_OUTPUT_FOLDER = f"{TEST_FOLDER}/images/output-images"
-
-# 기능별 함수화
-def perform_style_transfer(input_image, output_image, model, style_name):
-    model = style.load_model(model)
-    data = style.stylize(model, input_image, output_image)
-    data_img = data[0].clone().clamp(0, 255).numpy()
-    data_img = data_img.transpose(1, 2, 0).astype("uint8")
-    data_img = Image.fromarray(data_img)
-    return data_img
 
 st.title('PyTorch Style Transfer - ???')
 
@@ -50,7 +41,7 @@ clicked = st.button('Stylize')
 
 if clicked:
     with st.spinner(text="Waiting for Style Transfer"):
-        styled_image = perform_style_transfer(input_image, output_image, model, style_name)
+        styled_image = utils.perform_style_transfer(input_image, output_image, model, style_name)
         st.write('### Output image:')
         st.image(styled_image, width=400)
 
