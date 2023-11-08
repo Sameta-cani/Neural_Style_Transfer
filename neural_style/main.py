@@ -1,20 +1,19 @@
 import streamlit as st
 from PIL import Image
-import style
 import utils
 import os
 
 # 상수 정의
-TEST_FOLDER = "neural_style"
+TEST_FOLDER = "." #"neural_style"
 IMAGE_CONTENT_FOLDER = f"{TEST_FOLDER}/images/content-images"
 MODEL_FOLDER = f"{TEST_FOLDER}/saved_models"
 IMAGE_OUTPUT_FOLDER = f"{TEST_FOLDER}/images/output-images"
 
-st.title('PyTorch Style Transfer - ???')
+st.title('PyTorch Style Transfer')
 
 img = st.sidebar.selectbox(
     'Select Image',
-    ('amber.jpg', 'cat.png', 'Image upload')
+    ('amber.jpg', 'cat.png', 'Image upload', 'Camera')
 )
 
 style_name = st.sidebar.selectbox(
@@ -29,6 +28,15 @@ if img == 'Image upload':
         utils.save_uploaded_file(IMAGE_CONTENT_FOLDER, img_file)
         img = img_file.name
 
+if img == 'Camera':
+    img_file_buffer = st.camera_input("Take a picture")
+
+    if img_file_buffer is not None:
+        # To read image file buffer as a PIL Image:
+        photo = Image.open(img_file_buffer)
+        img = 'camera.png'
+        photo.save(os.path.join(IMAGE_CONTENT_FOLDER, img))
+        
 input_image = f"{IMAGE_CONTENT_FOLDER}/{img}"
 output_image = f"{IMAGE_OUTPUT_FOLDER}/{style_name}-{img}"
 model = f"{MODEL_FOLDER}/{style_name}.pth"
