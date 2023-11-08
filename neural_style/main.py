@@ -3,11 +3,22 @@ from PIL import Image
 import utils
 import os
 
+
+
 # 상수 정의
 TEST_FOLDER = "neural_style"
 IMAGE_CONTENT_FOLDER = f"{TEST_FOLDER}/images/content-images"
 MODEL_FOLDER = f"{TEST_FOLDER}/saved_models"
 IMAGE_OUTPUT_FOLDER = f"{TEST_FOLDER}/images/output-images"
+
+# 기능별 함수화
+def perform_style_transfer(input_image, output_image, model, style_name):
+    model = utils.load_model(model)
+    data = utils.stylize(model, input_image, output_image)
+    data_img = data[0].clone().clamp(0, 255).numpy()
+    data_img = data_img.transpose(1, 2, 0).astype("uint8")
+    data_img = Image.fromarray(data_img)
+    return data_img
 
 st.title('PyTorch Style Transfer-최적화 진행')
 
